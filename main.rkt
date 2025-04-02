@@ -100,13 +100,6 @@
        (hash-ref env x (λ ()
                          (error (string-append "Unbound variable: ~a" (symbol->string x)))))]
 
-      [`(define ,name ,value)
-       (let* ([dummy (error "Uninitialized recursive binding")]
-              [new-env (hash-set env name dummy)]
-              [rec-val (interp value new-env)])
-         (hash-set new-env name rec-val)
-         rec-val)]
-
       ;; Lambda abstraction.
       [`(lambda ,params ,body) `(closure ,e ,env)]
 
