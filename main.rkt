@@ -154,7 +154,7 @@
                      ,(loop (cdr bs))))))
         env)]
 
-      ;; map expressions.
+      ;; map expressions (bonus).
       [`(map ,fun ,lst)
        (let* ([f (interp fun env)]
               [lst-val (interp lst env)])
@@ -166,7 +166,7 @@
                          (cons (apply-closure f (list (first lst))) result))))
              (error "map: second argument is not a list")))]
 
-      ;; apply expression: supports builtin apply.
+      ;; apply expression: supports builtin apply (bonus).
       [`(apply ,fun ,args ... ,lst)
        (let* ([f (interp fun env)]
               [fixed-args (map (λ (arg) (interp arg env)) args)]
